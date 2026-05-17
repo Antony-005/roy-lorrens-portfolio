@@ -1,15 +1,13 @@
 import { FiLinkedin, FiYoutube, FiInstagram, FiFacebook } from 'react-icons/fi'
-import { SiSpotify } from 'react-icons/si'
+import { SiTiktok } from 'react-icons/si'
 import { SectionLabel, SectionTitle, GoldLine } from '@ui/Divider'
 
 const SOCIALS = [
-  { icon: FiLinkedin,  name: 'LinkedIn',  handle: 'Roy Lorrens Odhiambo', href: 'https://linkedin.com/in/roylorrens' },
+  { icon: FiLinkedin,  name: 'LinkedIn',  handle: 'Roy Lorrens Odhiambo', href: 'https://ke.linkedin.com/in/roy-lorrens-087305357' },
   { icon: FiYoutube,   name: 'YouTube',   handle: 'AR-EL Podcast',         href: 'https://www.youtube.com/@rlodhiambo' },
-  { icon: FiInstagram, name: 'Instagram', handle: '@roylorrens',            href: 'https://www.instagram.com/rl_odhiambo?utm_source=qr&igsh=MWVyMWJwd3k4aGlobA==' },
-  { icon: SiSpotify,   name: 'Spotify',   handle: 'AR-EL Podcast',         href: 'https://open.spotify.com' },
-  { icon: FiFacebook,  name: 'Facebook',  handle: 'Roy Lorrens',           href: 'https://www.facebook.com/lorrens.roy' },
- // { icon: FiMusic,  name: 'TikTok',  handle: '@rl.odhiambo', href: 'https://www.tiktok.com/@rl.odhiambo?_r=1&_t=ZS-96NObUrHYDH'},
-
+  { icon: FiInstagram, name: 'Instagram', handle: '@rl_odhiambo',           href: 'https://www.instagram.com/rl_odhiambo?utm_source=qr&igsh=MWVyMWJwd3k4aGlobA==' },
+  { icon: SiTiktok,    name: 'TikTok',    handle: '@rl.odhiambo',           href: 'https://www.tiktok.com/@rl.odhiambo?_r=1&_t=ZS-96NObUrHYDH' },
+  { icon: FiFacebook,  name: 'Facebook',  handle: 'Roy Lorrens',            href: 'https://www.facebook.com/lorrens.roy' },
 ]
 
 export default function Social() {

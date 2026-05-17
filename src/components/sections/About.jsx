@@ -40,7 +40,7 @@ export default function About() {
               Roy Lorrens Odhiambo is a learning strategist, content creator, and storyteller passionate about translating ideas into practical knowledge that empowers individuals and organizations.
             </p>
             <p style={{ color: 'var(--text-muted)', marginBottom: '1.25rem', fontSize: '0.95rem', lineHeight: 1.8 }}>
-              With experience in corporate environments and strategic HR practice, he contributes to performance management, employee development, and organizational growth initiatives. Alongside his corporate exposure, Roy engages in strategic HR consulting — helping individuals and organizations rethink systems, improve culture, and design effective learning strategies.
+              With experience in corporate environments and strategic HR practice, he contributes to performance management, employee development, and organizational growth initiatives. Alongside his corporate exposure, Roy engages in strategic HR consulting, helping individuals and organizations rethink systems, improve culture, and design effective learning strategies.
             </p>
             <p style={{ color: 'var(--text-muted)', marginBottom: '2rem', fontSize: '0.95rem', lineHeight: 1.8 }}>
               He is the Secretary of Vibrant Research Forum 101, supporting knowledge-sharing, research collaboration, and intellectual engagement across disciplines.
@@ -53,7 +53,7 @@ export default function About() {
               fontFamily: '"Cormorant Garamond", serif', fontSize: '1.1rem',
               fontStyle: 'italic', color: 'var(--text-muted)', lineHeight: 1.7,
             }}>
-              "Knowledge is only powerful when it moves — from the page, through the person, into the world."
+              "Knowledge is only powerful when it moves from the page, through the person, into the world."
             </div>
           </div>
         </div>

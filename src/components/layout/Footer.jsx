@@ -3,10 +3,10 @@ import { FiLinkedin, FiYoutube, FiInstagram, FiFacebook } from 'react-icons/fi'
 const FOOTER_LINKS = ['About', 'Expertise', 'Podcast', 'Book', 'Education', 'Contact']
 
 const SOCIAL = [
-  { icon: FiLinkedin,  href: 'https://linkedin.com/in/roylorrens',  label: 'LinkedIn' },
-  { icon: FiYoutube,   href: 'https://youtube.com/@arel-podcast',   label: 'YouTube' },
-  { icon: FiInstagram, href: 'https://instagram.com/roylorrens',    label: 'Instagram' },
-  { icon: FiFacebook,  href: 'https://facebook.com/roylorrens',     label: 'Facebook' },
+  { icon: FiLinkedin,  href: 'https://ke.linkedin.com/in/roy-lorrens-087305357',  label: 'LinkedIn' },
+  { icon: FiYoutube,   href: 'https://www.youtube.com/@rlodhiambo',   label: 'YouTube' },
+  { icon: FiInstagram, href: 'https://www.instagram.com/rl_odhiambo?utm_source=qr&igsh=MWVyMWJwd3k4aGlobA==',    label: 'Instagram' },
+  { icon: FiFacebook,  href: 'https://www.facebook.com/lorrens.roy',     label: 'Facebook' },
 ]
 
 export default function Footer() {
