@@ -19,7 +19,7 @@ const INPUT_STYLE = {
 export default function Contact() {
   const formRef = useRef(null)
   const [status, setStatus] = useState(null) // null | 'sending' | 'success' | 'error'
-  const [values, setValues] = useState({ name: '', email: '', subject: '', message: '' })
+  const [values, setValues] = useState({ from_name: '', from_email: '', subject: '', message: '' })
 
   const handleChange = (e) => setValues({ ...values, [e.target.name]: e.target.value })
 
@@ -102,8 +102,8 @@ export default function Contact() {
           <div className="reveal reveal-delay-1">
             <form ref={formRef} onSubmit={handleSubmit}>
               {[
-                { label: 'Full Name', name: 'name', type: 'text', placeholder: 'Your full name' },
-                { label: 'Email Address', name: 'email', type: 'email', placeholder: 'your@email.com' },
+                { label: 'Full Name', name: 'from_name', type: 'text', placeholder: 'Your full name' },
+                { label: 'Email Address', name: 'from_email', type: 'email', placeholder: 'your@email.com' },
                 { label: 'Subject', name: 'subject', type: 'text', placeholder: 'How can Roy help you?' },
               ].map((field) => (
                 <div key={field.name} style={{ marginBottom: '1.5rem' }}>
