@@ -3,11 +3,10 @@ import emailjs from '@emailjs/browser'
 import { FiMail, FiMapPin, FiBriefcase, FiSend } from 'react-icons/fi'
 import { SectionLabel, SectionTitle, GoldLine } from '@ui/Divider'
 
-// ─── Replace these with your real EmailJS credentials ──────────────
-// See setup instructions in README.md
-const EMAILJS_SERVICE_ID  = 'YOUR_SERVICE_ID'
-const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID'
-const EMAILJS_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY'
+
+const EMAILJS_SERVICE_ID  = 'service_p7150yr'
+const EMAILJS_TEMPLATE_ID = 'template_4lkdwrh'
+const EMAILJS_PUBLIC_KEY  = 'cd9nAxl5qY640edes'
 // ────────────────────────────────────────────────────────────────────
 
 const INPUT_STYLE = {
