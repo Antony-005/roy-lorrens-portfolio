@@ -8,7 +8,6 @@ import Book from '@sections/Book'
 import Leadership from '@sections/Leadership'
 import Education from '@sections/Education'
 import Testimonials from '@sections/Testimonials'
-import Resume from '@sections/Resume'
 import Social from '@sections/Social'
 import Contact from '@sections/Contact'
 import Divider from '@ui/Divider'
@@ -38,8 +37,6 @@ export default function Home() {
       <Education />
       <Divider />
       <Testimonials />
-      <Divider />
-      <Resume />
       <Divider />
       <Social />
       <Divider />
