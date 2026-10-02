@@ -6,6 +6,7 @@ import ScrollProgress from '@ui/ScrollProgress'
 import CursorGlow from '@ui/CursorGlow'
 import Home from '@/pages/Home'
 import NotFound from '@/pages/NotFound'
+import PrivacyPolicy from '@/pages/PrivacyPolicy'
 
 export default function App() {
   // Reveal-on-scroll observer
@@ -29,6 +30,7 @@ export default function App() {
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/privacy" element={<PrivacyPolicy />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>

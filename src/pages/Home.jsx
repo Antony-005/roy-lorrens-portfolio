@@ -11,6 +11,7 @@ import Testimonials from '@sections/Testimonials'
 import Social from '@sections/Social'
 import Contact from '@sections/Contact'
 import Divider from '@ui/Divider'
+import Kickline254 from '@sections/Kickline254'
 
 export default function Home() {
   return (
@@ -31,6 +32,7 @@ export default function Home() {
       <Podcast />
       <Divider />
       <Book />
+      <Kickline254 />
       <Divider />
       <Leadership />
       <Divider />
