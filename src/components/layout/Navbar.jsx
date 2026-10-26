@@ -15,58 +15,61 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
 
+  // Solid background after scrolling
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40)
-    window.addEventListener('scroll', onScroll)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
+  // Lock page scroll while the menu is open; close on Escape or when resized to desktop
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? 'hidden' : ''
+    const onKey = (e) => {
+      if (e.key === 'Escape') setMenuOpen(false)
+    }
+    const onResize = () => {
+      if (window.innerWidth >= 1024) setMenuOpen(false)
+    }
+    window.addEventListener('keydown', onKey)
+    window.addEventListener('resize', onResize)
+    return () => {
+      document.body.style.overflow = ''
+      window.removeEventListener('keydown', onKey)
+      window.removeEventListener('resize', onResize)
+    }
+  }, [menuOpen])
+
   const scrollTo = (href) => {
-    document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' })
+    const wasOpen = menuOpen
     setMenuOpen(false)
+    // Small delay so the body scroll-lock is released before scrolling
+    setTimeout(() => {
+      document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' })
+    }, wasOpen ? 80 : 0)
   }
+
+  const navClass =
+    'site-nav' + (scrolled ? ' is-scrolled' : '') + (menuOpen ? ' is-open' : '')
 
   return (
     <>
-      <nav
-        style={{
-          position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
-          padding: '1.2rem 2rem',
-          display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-          background: scrolled ? 'rgba(13,17,23,0.95)' : 'rgba(13,17,23,0.6)',
-          backdropFilter: 'blur(12px)',
-          borderBottom: `1px solid ${scrolled ? 'rgba(201,168,76,0.12)' : 'transparent'}`,
-          transition: 'all 0.4s ease',
-        }}
-      >
+      <nav className={navClass} aria-label="Main navigation">
         {/* Logo */}
         <button
-  onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-  style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer' }}
->
-  <img
-    src={arelLogo}
-    alt="AR-EL Logo"
-    style={{ height: '42px', width: 'auto', objectFit: 'contain' }}
-  />
-</button>
+          className="nav-logo"
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          aria-label="Back to top"
+        >
+          <img src={arelLogo} alt="AR-EL Logo" />
+        </button>
 
-        {/* Desktop Links */}
-        <ul style={{ display: 'flex', gap: '2rem', listStyle: 'none', margin: 0 }}
-            className="hidden md:flex">
+        {/* Desktop links (shown from 1024px up) */}
+        <ul className="nav-links">
           {NAV_LINKS.map((link) => (
             <li key={link.href}>
-              <button
-                onClick={() => scrollTo(link.href)}
-                style={{
-                  fontSize: '0.78rem', letterSpacing: '0.12em',
-                  textTransform: 'uppercase', color: 'var(--text-muted)',
-                  background: 'none', border: 'none',
-                  transition: 'color 0.2s',
-                }}
-                onMouseEnter={e => e.target.style.color = 'var(--gold)'}
-                onMouseLeave={e => e.target.style.color = 'var(--text-muted)'}
-              >
+              <button className="nav-link" onClick={() => scrollTo(link.href)}>
                 {link.label}
               </button>
             </li>
@@ -74,33 +77,39 @@ export default function Navbar() {
         </ul>
 
         {/* CTA + Hamburger */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-          <button
-            className="hidden md:block btn-outline"
-            style={{ padding: '0.45rem 1.25rem', fontSize: '0.72rem' }}
-            onClick={() => scrollTo('#contact')}
-          >
+        <div className="nav-actions">
+          <button className="btn-outline nav-cta" onClick={() => scrollTo('#contact')}>
             Connect
           </button>
-          {/* Hamburger */}
+
           <button
-            className="md:hidden"
+            className="nav-burger"
             onClick={() => setMenuOpen(!menuOpen)}
-            style={{ background: 'none', border: 'none', display: 'flex', flexDirection: 'column', gap: '5px', padding: '4px' }}
-            aria-label="Toggle menu"
+            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={menuOpen}
+            aria-controls="mobile-menu"
           >
-            {[0, 1, 2].map((i) => (
-              <span key={i} style={{
-                display: 'block', width: '24px', height: '1.5px',
-                background: 'var(--text-muted)',
-                transition: 'all 0.3s',
-                transform: menuOpen
-                  ? i === 0 ? 'translateY(6.5px) rotate(45deg)'
-                  : i === 2 ? 'translateY(-6.5px) rotate(-45deg)'
-                  : 'scaleX(0)'
-                  : 'none',
-              }} />
-            ))}
+            <span className="burger-lines">
+              {[0, 1, 2].map((i) => (
+                <span
+                  key={i}
+                  style={{
+                    display: 'block',
+                    width: '24px',
+                    height: '1.5px',
+                    background: menuOpen ? 'var(--gold)' : 'var(--text-muted)',
+                    transition: 'all 0.3s',
+                    transform: menuOpen
+                      ? i === 0
+                        ? 'translateY(6.5px) rotate(45deg)'
+                        : i === 2
+                        ? 'translateY(-6.5px) rotate(-45deg)'
+                        : 'scaleX(0)'
+                      : 'none',
+                  }}
+                />
+              ))}
+            </span>
           </button>
         </div>
       </nav>
@@ -109,36 +118,48 @@ export default function Navbar() {
       <AnimatePresence>
         {menuOpen && (
           <motion.div
+            id="mobile-menu"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Site menu"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
             style={{
-              position: 'fixed', inset: 0, zIndex: 99,
+              position: 'fixed',
+              inset: 0,
+              zIndex: 99,
               background: 'var(--dark)',
-              display: 'flex', flexDirection: 'column',
-              alignItems: 'center', justifyContent: 'center', gap: '2.5rem',
+              display: 'flex',
+              flexDirection: 'column',
+              overflowY: 'auto',
             }}
           >
-            {NAV_LINKS.map((link, i) => (
-              <motion.button
-                key={link.href}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.07 }}
-                onClick={() => scrollTo(link.href)}
-                style={{
-                  fontFamily: '"Cormorant Garamond", serif',
-                  fontSize: '2rem', color: 'var(--text-muted)',
-                  background: 'none', border: 'none',
-                  transition: 'color 0.2s',
-                }}
-                onMouseEnter={e => e.target.style.color = 'var(--gold)'}
-                onMouseLeave={e => e.target.style.color = 'var(--text-muted)'}
-              >
-                {link.label}
-              </motion.button>
-            ))}
+            {/* margin:auto centres the links, and still lets short screens scroll */}
+            <div
+              style={{
+                margin: 'auto',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                gap: '1.25rem',
+                padding: '6rem 1.5rem 3rem',
+              }}
+            >
+              {NAV_LINKS.map((link, i) => (
+                <motion.button
+                  key={link.href}
+                  className="menu-link"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.07 }}
+                  onClick={() => scrollTo(link.href)}
+                >
+                  {link.label}
+                </motion.button>
+              ))}
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
